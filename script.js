@@ -11,10 +11,25 @@ function getComputerChoice(){
 
 function getHumanChoice() {
     const choices = ["rock", "paper", "scissors"];
-    let humanChoice = prompt("Напиши rock, paper или scissors").toLowerCase();
+
+    let humanChoice = prompt("Напиши rock, paper или scissors");
+
+    if (humanChoice === null) {
+        return null;
+    }
+
+    humanChoice = humanChoice.toLowerCase();
+
     while (!choices.includes(humanChoice)) {
         console.log("Wrong answer");
-        humanChoice = prompt("Напиши rock, paper или scissors").toLowerCase();
+
+        humanChoice = prompt("Напиши rock, paper или scissors");
+
+        if (humanChoice === null) {
+            return null;
+        }
+
+        humanChoice = humanChoice.toLowerCase();
     }
 
     return humanChoice;
@@ -64,13 +79,31 @@ break;
             humanScore++;
         }
         break;
-    default:
-        console.log("Wrong word");
-        break;
 }
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+
+        if (humanChoice === null) {
+            console.log("Game cancelled.");
+            return;
+        }
+
+        playRound(humanChoice, getComputerChoice());
+    }
+}
+
+playGame();
 
 console.log("Human:", humanScore);
 console.log("Computer:", computerScore);
+
+if (humanScore > computerScore) {
+    console.log("Human wins the game!");
+} else if (computerScore > humanScore) {
+    console.log("Computer wins the game!");
+} else {
+    console.log("It's a draw!");
+}
