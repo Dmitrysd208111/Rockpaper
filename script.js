@@ -10,8 +10,14 @@ function getComputerChoice(){
 }
 
 function getHumanChoice() {
-    const humanChoice = prompt("Напиши rock, paper или scissors");
-    return humanChoice.toLowerCase();
+    const choices = ["rock", "paper", "scissors"];
+    let humanChoice = prompt("Напиши rock, paper или scissors").toLowerCase();
+    while (!choices.includes(humanChoice)) {
+        console.log("Wrong answer");
+        humanChoice = prompt("Напиши rock, paper или scissors").toLowerCase();
+    }
+
+    return humanChoice;
 }
 
 function playRound(humanChoice, computerChoice){
@@ -58,7 +64,9 @@ break;
             humanScore++;
         }
         break;
-    
+    default:
+        console.log("Wrong word");
+        break;
 }
 }
 
